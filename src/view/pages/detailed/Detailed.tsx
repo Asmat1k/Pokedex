@@ -43,17 +43,18 @@ const DetailedPage: FC = (): ReactElement => {
     pokemonData.sprites.other.home.front_default ||
     'https://cdn-icons-png.flaticon.com/512/17/17047.png';
 
-  //! TODO Пофиксить баг (если вернуться назад на страницу обычного покемона и потом еще раз назад, то ошибка)
   if (error) {
     return (
-      <section className={styles.detailed}>
-        <Error message={error} />
+      <>
+        <section className={styles.detailed}>
+          <Error message={error} />
+        </section>
         <span className={styles.back}>
-          <Button isDisabled={false} onClick={() => navigate(-2)}>
-            Назад
+          <Button isDisabled={false} onClick={() => navigate('/', { replace: true })}>
+            Искать покемона
           </Button>
         </span>
-      </section>
+      </>
     );
   }
 
