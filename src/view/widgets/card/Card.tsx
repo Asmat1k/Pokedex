@@ -1,4 +1,4 @@
-import type { FC, MouseEvent, ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 import { CatchButton } from '@/view/features/catchButton';
@@ -22,12 +22,6 @@ const Card: FC<CardProps> = ({ pokemon }): ReactElement => {
     sprites.other.home.front_default ||
     'https://cdn-icons-png.flaticon.com/512/17/17047.png';
 
-  const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if ((event.target as HTMLElement).closest('button')) {
-      event.preventDefault();
-    }
-  };
-
   return (
     <li
       className={styles.card}
@@ -35,7 +29,7 @@ const Card: FC<CardProps> = ({ pokemon }): ReactElement => {
         background: `radial-gradient(circle at 50% 20%, ${primaryColor} 50%, rgb(255, 255, 255) 40%)`
       }}
     >
-      <Link className={styles.card__link} to={`/pokemon/${name || id}`} onClick={handleLinkClick}>
+      <Link className={styles.card__link} to={`/pokemon/${name || id}`}>
         <Img alt={name} src={imgSrc} />
         <h5 className={styles.card__name}>{name}</h5>
         <div className={styles.card__id}>{id}</div>

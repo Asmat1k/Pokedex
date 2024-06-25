@@ -29,6 +29,7 @@ const CatchButton: FC<CatchButtonProps> = ({
   }, [pokemonId]);
 
   const handleBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (onClick) {
       onClick(event);
     } else {
