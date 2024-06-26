@@ -1,33 +1,22 @@
+import { observer } from 'mobx-react-lite';
 import type { FC, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
 import { InfiniteScroll } from '@/view/widgets/infiniteScroll';
 import { List } from '@/view/widgets/list';
 import styles from './catched.module.scss';
-import type { PokemonsListInterface } from '@/model/transport/api';
 import { storeService } from '@/service/storeService';
 
+const ITEMS_PER_PAGE = 12;
+
 const CatchedPage: FC = (): ReactElement => {
-  const [catchedPokemons, setCatchedPokemons] = useState<PokemonsListInterface>({ results: [] });
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPokemons, setTotalPokemons] = useState<number>(0);
+  const catchedPokemons = storeService.generatePokemonListFromStore(0, currentPage * ITEMS_PER_PAGE);
+  const totalPokemons = storeService.getTotalPokemonsCount();
 
   useEffect(() => {
-    (async function getList() {
-      const start = (currentPage - 1) * 12;
-      const pokemonList = storeService.generatePokemonListFromStore(start, 12);
-      if (pokemonList.results.length > 0) {
-        setCatchedPokemons((prev) => ({
-          results: [
-            ...prev.results,
-            ...pokemonList.results.filter(
-              (newPokemon) => !prev.results.some((existingPokemon) => existingPokemon.url === newPokemon.url)
-            )
-          ]
-        }));
-      }
-      setTotalPokemons(storeService.getTotalPokemonsCount());
-    })();
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    storeService.generatePokemonListFromStore(start, ITEMS_PER_PAGE);
   }, [currentPage]);
 
   return (
@@ -49,4 +38,4 @@ const CatchedPage: FC = (): ReactElement => {
   );
 };
 
-export default CatchedPage;
+export default observer(CatchedPage);
