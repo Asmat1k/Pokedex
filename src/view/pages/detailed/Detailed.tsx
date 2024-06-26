@@ -18,7 +18,6 @@ const DetailedPage: FC = (): ReactElement => {
   const navigate = useNavigate();
   const [pokemonData, setPokemonData] = useState<PokemonInterface | null>(null);
   const [error, setError] = useState<string>('');
-  const catchDate = storeService.getPokemonCatchDate(pokemonData.id);
 
   const fetchPokemonData = useCallback(async () => {
     const data = await pokemonService.getPokemonByParam(id);
@@ -56,6 +55,8 @@ const DetailedPage: FC = (): ReactElement => {
   if (!pokemonData) {
     return <PokeballLoader />;
   }
+
+  const catchDate = storeService.getPokemonCatchDate(pokemonData.id);
 
   return (
     <>
