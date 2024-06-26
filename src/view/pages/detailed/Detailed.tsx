@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import type { ReactElement } from 'react';
 import { useEffect, useState, useCallback, type FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -16,8 +17,8 @@ const DetailedPage: FC = (): ReactElement => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pokemonData, setPokemonData] = useState<PokemonInterface | null>(null);
-  const [catchedDate, setCatchedDate] = useState<string | boolean>(false);
   const [error, setError] = useState<string>('');
+  const catchDate = storeService.getPokemonCatchDate(pokemonData.id);
 
   const fetchPokemonData = useCallback(async () => {
     const data = await pokemonService.getPokemonByParam(id);
@@ -28,19 +29,13 @@ const DetailedPage: FC = (): ReactElement => {
     setPokemonData(data);
   }, [id]);
 
-  const checkCatchDate = useCallback(async () => {
-    const idToSearch = Number.isNaN(+id) ? await pokemonService.getPokemonIdByName(id) : id;
-    setCatchedDate(storeService.getPokemonCatchDate(+idToSearch) || false);
-  }, [id]);
-
   useEffect(() => {
     fetchPokemonData();
-    checkCatchDate();
-  }, [fetchPokemonData, checkCatchDate]);
+  }, [fetchPokemonData]);
 
   const imgSource = () =>
-    pokemonData.sprites.other.dream_world.front_default ||
-    pokemonData.sprites.other.home.front_default ||
+    pokemonData?.sprites.other.dream_world.front_default ||
+    pokemonData?.sprites.other.home.front_default ||
     'https://cdn-icons-png.flaticon.com/512/17/17047.png';
 
   if (error) {
@@ -88,10 +83,10 @@ const DetailedPage: FC = (): ReactElement => {
               </div>
               <div className={styles.info__catched}>
                 <div className={styles.catched__date}>
-                  <div className={styles.catched__title}>Дата поимки: {catchedDate || '-'}</div>
+                  <div className={styles.catched__title}>Дата поимки: {catchDate || '-'}</div>
                 </div>
               </div>
-              <CatchButton pokemonId={pokemonData.id} onCatchCallback={setCatchedDate} />
+              <CatchButton pokemonId={pokemonData.id} />
             </div>
           </div>
         </div>
@@ -105,4 +100,4 @@ const DetailedPage: FC = (): ReactElement => {
   );
 };
 
-export default DetailedPage;
+export default observer(DetailedPage);
