@@ -1,3 +1,4 @@
+import { makeAutoObservable } from 'mobx';
 import type { CatchedPokemonStoreInterface } from '@/model/store/store';
 
 class CatchedPokemonStore implements CatchedPokemonStoreInterface {
@@ -14,6 +15,7 @@ class CatchedPokemonStore implements CatchedPokemonStoreInterface {
     } else {
       this.capturedPokemons = new Map();
     }
+    makeAutoObservable(this);
     return this;
   }
 
