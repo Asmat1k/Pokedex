@@ -1,7 +1,8 @@
+import { observer } from 'mobx-react-lite';
 import type { FC, ReactElement } from 'react';
 
-import { useLoading } from '@/view/shared/lib/context';
 import { Button } from '@/view/shared/ui/button';
+import loadingService from '@/service/loadingService';
 
 interface InfiniteScrollProps {
   currentPage: number;
@@ -10,25 +11,20 @@ interface InfiniteScrollProps {
   itemsLoaded: number;
 }
 
-const InfiniteScroll: FC<InfiniteScrollProps> = ({
-  currentPage,
-  setCurrentPage,
-  totalItems,
-  itemsLoaded
-}): ReactElement => {
-  const { isLoading } = useLoading();
+const InfiniteScroll: FC<InfiniteScrollProps> = observer(
+  ({ currentPage, setCurrentPage, totalItems, itemsLoaded }): ReactElement => {
+    const loadMoreItems = () => {
+      setCurrentPage(currentPage + 1);
+    };
 
-  const loadMoreItems = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  return (
-    <div>
-      <Button disabled={itemsLoaded >= totalItems || isLoading} onClick={loadMoreItems}>
-        {itemsLoaded >= totalItems ? 'Все покемоны загружены' : 'Загрузить ещё'}
-      </Button>
-    </div>
-  );
-};
+    return (
+      <div>
+        <Button disabled={itemsLoaded >= totalItems || loadingService.isLoadingNow()} onClick={loadMoreItems}>
+          {itemsLoaded >= totalItems ? 'Все покемоны загружены' : 'Загрузить ещё'}
+        </Button>
+      </div>
+    );
+  }
+);
 
 export { InfiniteScroll };

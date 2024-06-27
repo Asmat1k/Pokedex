@@ -1,9 +1,10 @@
+import { observer } from 'mobx-react-lite';
 import type { FC, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
-import { useLoading } from '@/view/shared/lib/context';
 import styles from './Pagination.module.scss';
 import type { PokemonsListInterface } from '@/model/transport/api';
+import loadingService from '@/service/loadingService';
 import { paginationService } from '@/service/paginationService';
 
 interface PaginationProps {
@@ -11,12 +12,10 @@ interface PaginationProps {
   setPokemonList: (data: PokemonsListInterface) => void;
 }
 
-const Pagination: FC<PaginationProps> = ({ pokemonList, setPokemonList }): ReactElement => {
+const Pagination: FC<PaginationProps> = observer(({ pokemonList, setPokemonList }): ReactElement => {
   const [currentPage, setCurrentPage] = useState<number>(paginationService.currentPage);
   const [canGoNext, setCanGoNext] = useState<boolean>(paginationService.canGoNext());
   const [canGoPrev, setCanGoPrev] = useState<boolean>(paginationService.canGoPrev());
-
-  const { isLoading, startLoading } = useLoading();
 
   useEffect(() => {
     setCanGoNext(paginationService.canGoNext());
@@ -24,7 +23,6 @@ const Pagination: FC<PaginationProps> = ({ pokemonList, setPokemonList }): React
   }, [pokemonList]);
 
   const handlePagination = async (btnId: string) => {
-    startLoading();
     try {
       const newPokemonList =
         btnId === 'next' ? await paginationService.nextPage() : await paginationService.prevPage();
@@ -42,7 +40,7 @@ const Pagination: FC<PaginationProps> = ({ pokemonList, setPokemonList }): React
     <section className={styles.pagination}>
       <button
         className={styles.pagination__arrow}
-        disabled={!canGoPrev || isLoading}
+        disabled={!canGoPrev || loadingService.isLoadingNow()}
         id='prev'
         onClick={() => handlePagination('prev')}
       >
@@ -51,7 +49,7 @@ const Pagination: FC<PaginationProps> = ({ pokemonList, setPokemonList }): React
       <span className={styles.pagination__current}>{currentPage}</span>
       <button
         className={styles.pagination__arrow}
-        disabled={!canGoNext || isLoading}
+        disabled={!canGoNext || loadingService.isLoadingNow()}
         id='next'
         onClick={() => handlePagination('next')}
       >
@@ -59,6 +57,6 @@ const Pagination: FC<PaginationProps> = ({ pokemonList, setPokemonList }): React
       </button>
     </section>
   );
-};
+});
 
 export { Pagination };
