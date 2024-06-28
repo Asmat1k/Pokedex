@@ -24,6 +24,7 @@ const Pagination: FC<PaginationProps> = observer(({ pokemonList, setPokemonList 
 
   const handlePagination = async (btnId: string) => {
     try {
+      loadingService.startLoading();
       const newPokemonList =
         btnId === 'next' ? await paginationService.nextPage() : await paginationService.prevPage();
       if (newPokemonList) {

@@ -26,6 +26,9 @@ const List: FC<ListProps> = observer(({ pokemonList }): ReactElement => {
         pokemonService.getOnePokemon(pokemonData.url)
       );
       const responses = await Promise.all(pokemonPromises);
+      if (responses.length == 0) {
+        setError('На данной странице не найдено покемонов');
+      }
       setPokemons(responses);
     } catch (err) {
       setError(err.message || 'Неизвестная ошибка при получении покемонов');
@@ -34,7 +37,6 @@ const List: FC<ListProps> = observer(({ pokemonList }): ReactElement => {
     }
   }, [pokemonList]);
 
-  // Вычисление до отрисовки*
   useLayoutEffect(() => {
     fetchPokemons();
   }, [fetchPokemons]);
@@ -47,7 +49,7 @@ const List: FC<ListProps> = observer(({ pokemonList }): ReactElement => {
     );
   }
 
-  if (error || pokemons.length === 0) {
+  if (error) {
     return (
       <ul className={styles.list}>
         <Error message={error} />
