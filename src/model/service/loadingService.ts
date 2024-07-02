@@ -1,7 +1,7 @@
 interface LoadingServiceInterface {
+  isLoading: boolean;
   startLoading: () => void;
   stopLoading: () => void;
-  isLoadingNow: () => void;
 }
 
 export { LoadingServiceInterface };

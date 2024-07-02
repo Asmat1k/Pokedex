@@ -19,7 +19,7 @@ const InfiniteScroll: FC<InfiniteScrollProps> = observer(
 
     return (
       <div>
-        <Button disabled={itemsLoaded >= totalItems || loadingService.isLoadingNow()} onClick={loadMoreItems}>
+        <Button disabled={itemsLoaded >= totalItems || loadingService.isLoading} onClick={loadMoreItems}>
           {itemsLoaded >= totalItems ? 'Все покемоны загружены' : 'Загрузить ещё'}
         </Button>
       </div>

@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import type { LoadingServiceInterface } from '@/model/service/loadingService';
 
 class LoadingService implements LoadingServiceInterface {
-  protected isLoading = false;
+  isLoading = false;
   private static instance: LoadingService = null;
 
   constructor() {
@@ -19,10 +19,6 @@ class LoadingService implements LoadingServiceInterface {
 
   stopLoading() {
     this.isLoading = false;
-  }
-
-  isLoadingNow() {
-    return this.isLoading;
   }
 }
 

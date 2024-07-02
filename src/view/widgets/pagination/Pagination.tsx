@@ -41,7 +41,7 @@ const Pagination: FC<PaginationProps> = observer(({ pokemonList, setPokemonList 
     <section className={styles.pagination}>
       <button
         className={styles.pagination__arrow}
-        disabled={!canGoPrev || loadingService.isLoadingNow()}
+        disabled={!canGoPrev || loadingService.isLoading}
         id='prev'
         onClick={() => handlePagination('prev')}
       >
@@ -50,7 +50,7 @@ const Pagination: FC<PaginationProps> = observer(({ pokemonList, setPokemonList 
       <span className={styles.pagination__current}>{currentPage}</span>
       <button
         className={styles.pagination__arrow}
-        disabled={!canGoNext || loadingService.isLoadingNow()}
+        disabled={!canGoNext || loadingService.isLoading}
         id='next'
         onClick={() => handlePagination('next')}
       >

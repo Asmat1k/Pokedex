@@ -41,7 +41,7 @@ const List: FC<ListProps> = observer(({ pokemonList }): ReactElement => {
     fetchPokemons();
   }, [fetchPokemons]);
 
-  if (loadingService.isLoadingNow()) {
+  if (loadingService.isLoading) {
     return (
       <ul className={styles.list}>
         <PokeballLoader />
