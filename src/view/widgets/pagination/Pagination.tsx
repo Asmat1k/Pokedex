@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import styles from './Pagination.module.scss';
 import type { PokemonsListInterface } from '@/model/transport/api';
-import loadingService from '@/service/loadingService';
+import { loadingService } from '@/service/loadingService';
 import { paginationService } from '@/service/paginationService';
 
 interface PaginationProps {

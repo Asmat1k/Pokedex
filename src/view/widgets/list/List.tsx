@@ -7,7 +7,7 @@ import { PokeballLoader } from '../../shared/ui/pokeballLoader';
 import { Card } from '../card/Card';
 import styles from './List.module.scss';
 import type { PokemonInterface, PokemonsListInterface } from '@/model/transport/api';
-import loadingService from '@/service/loadingService';
+import { loadingService } from '@/service/loadingService';
 import { pokemonService } from '@/service/pokemonService';
 
 interface ListProps {

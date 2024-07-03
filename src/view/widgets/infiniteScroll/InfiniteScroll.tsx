@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import type { FC, ReactElement } from 'react';
 
 import { Button } from '@/view/shared/ui/button';
-import loadingService from '@/service/loadingService';
+import { loadingService } from '@/service/loadingService';
 
 interface InfiniteScrollProps {
   currentPage: number;

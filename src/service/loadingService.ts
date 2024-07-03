@@ -24,4 +24,4 @@ class LoadingService implements LoadingServiceInterface {
 
 const loadingService = new LoadingService();
 
-export default loadingService;
+export { loadingService };
