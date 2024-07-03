@@ -19,14 +19,14 @@ class CatchedPokemonStore implements CatchedPokemonStoreInterface {
     return this;
   }
 
-  getCapturedPokemonsInfo(): Array<{ id: number; date: string }> {
+  get capturedPokemonsInfo(): Array<{ id: number; date: string }> {
     return Array.from(this.capturedPokemons.entries()).map(([id, date]) => ({
       id,
       date
     }));
   }
 
-  getCapturedPokemonsCount(): number {
+  get capturedPokemonsCount(): number {
     return this.capturedPokemons.size;
   }
 

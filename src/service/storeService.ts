@@ -28,7 +28,7 @@ class StoreService implements StoreServiceInterface {
 
   generatePokemonListFromStore(start: number, limit: number): PokemonsListInterface {
     const resultObj: PokemonsListInterface = { results: [] };
-    const capturedPokemons = this.store.getCapturedPokemonsInfo();
+    const capturedPokemons = this.store.capturedPokemonsInfo;
     const paginatedPokemons = capturedPokemons.slice(start, start + limit);
 
     for (const item of paginatedPokemons) {
@@ -37,8 +37,8 @@ class StoreService implements StoreServiceInterface {
     return resultObj;
   }
 
-  getTotalPokemonsCount(): number {
-    return this.store.getCapturedPokemonsCount();
+  get totalPokemonsCount(): number {
+    return this.store.capturedPokemonsCount;
   }
 }
 

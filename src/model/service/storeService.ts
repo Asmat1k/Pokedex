@@ -5,7 +5,7 @@ interface StoreServiceInterface {
   checkPokemon(id: number): boolean;
   getPokemonCatchDate(id: number): string;
   generatePokemonListFromStore(start: number, limit: number): PokemonsListInterface;
-  getTotalPokemonsCount(): number;
+  get totalPokemonsCount(): number;
 }
 
 export { StoreServiceInterface };

@@ -12,7 +12,7 @@ const ITEMS_PER_PAGE = 12;
 const CatchedPage: FC = (): ReactElement => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const catchedPokemons = storeService.generatePokemonListFromStore(0, currentPage * ITEMS_PER_PAGE);
-  const totalPokemons = storeService.getTotalPokemonsCount();
+  const totalPokemons = storeService.totalPokemonsCount;
 
   return (
     <section className={styles.catched}>

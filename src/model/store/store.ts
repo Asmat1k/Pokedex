@@ -1,6 +1,6 @@
 interface CatchedPokemonStoreInterface {
-  getCapturedPokemonsInfo(): Array<{ id: number; date: string }>;
-  getCapturedPokemonsCount(): number;
+  get capturedPokemonsInfo(): Array<{ id: number; date: string }>;
+  get capturedPokemonsCount(): number;
   getPokemonCatchDate(id: number): string;
   catchPokemon(id: number): void;
   isPokemonCatched(id: number): boolean;
