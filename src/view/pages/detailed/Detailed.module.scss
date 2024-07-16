@@ -1,0 +1,102 @@
+.detailed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+  &__container {
+    .detailed__body {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 14px -5px rgba(0, 0, 0, 0.75);
+
+        max-width: 500px;
+        min-width: 305px;
+        padding: 20px;
+        .info__header {
+          .header__name {
+            font-size: 40px;
+            line-height: 50px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: capitalize;
+          }
+          .header__id {
+            font-size: 20px;
+            color: gray;
+          }
+        }
+
+        .info__abilities {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 5px;
+          .abilities__title {
+            font-size: 16px;
+          }
+          .abilities__list {
+            display: flex;
+            gap: 5px;
+            .abilities__item {
+              border: 1px solid black;
+              border-radius: 20px;
+              padding: 5px 10px;
+            }
+          }
+        }
+
+        .info__catched {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 5px;
+          .catched__title {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.back {
+  position: absolute;
+  right: 15px;
+  top: 50px;
+}
+
+@media (max-width: 1000px) {
+  .detailed {
+    &__container {
+      .detailed__body {
+        .info {
+          position: static;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .detailed {
+    min-height: 90vh;
+    height: 100%;
+    &__container {
+      .detailed__body {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}

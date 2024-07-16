@@ -1,0 +1,43 @@
+.page {
+  &__container {
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    min-height: 100vh;
+  }
+
+  &__header {
+    text-align: center;
+  }
+  &__title {
+    font-size: 120px;
+    &_small {
+      color: red;
+      font-size: 60px;
+    }
+  }
+  &__status {
+    font-size: 13px;
+    opacity: 0.5;
+  }
+
+  &__description {
+    text-align: center;
+    font-size: 32px;
+    text-align: center;
+
+    max-width: 800px;
+    span {
+      display: inline-block;
+
+      color: rgba($color: #000000, $alpha: 0.7);
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
+}
